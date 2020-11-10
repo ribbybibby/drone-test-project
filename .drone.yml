@@ -10,6 +10,8 @@ steps:
 
   - name: test
     image: golang:1.15-alpine
+    environment:
+      CGO_ENABLED: 0
     volumes:
       - name: deps
         path: /go

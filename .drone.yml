@@ -9,7 +9,7 @@ steps:
       - git fetch --tags
 
   - name: test
-    image: golang:1.15-alpine
+    image: golang:1.15
     environment:
       CGO_ENABLED: 0
     volumes:
@@ -19,7 +19,7 @@ steps:
       - go test -v ./... -cover
 
   - name: release
-    image: golang:1.15-alpine
+    image: golang:1.15
     environment:
       GITHUB_TOKEN:
         from_secret: github_token

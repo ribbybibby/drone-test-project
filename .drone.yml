@@ -16,7 +16,7 @@ steps:
       - name: deps
         path: /go
     commands:
-      - go test -race -v ./... -cover
+      - go test -v ./... -cover
 
   - name: release
     image: golang:1.15-alpine

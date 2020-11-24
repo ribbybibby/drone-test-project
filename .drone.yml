@@ -31,6 +31,17 @@ steps:
     when:
       event: tag
 
+  - name: docker-publish
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      repo: utilitywarehouse/drone-test-project
+      registry: quay.io
+      auto_tag: true
+
 volumes:
   - name: deps
     temp: {}

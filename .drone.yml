@@ -38,7 +38,7 @@ steps:
         from_secret: docker_username
       password:
         from_secret: docker_password
-      repo: utilitywarehouse/drone-test-project
+      repo: quay.io/utilitywarehouse/drone-test-project
       registry: quay.io
       auto_tag: true
 

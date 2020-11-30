@@ -8,4 +8,3 @@ RUN apk --no-cache add git &&\
 FROM alpine:3.12
 COPY --from=build /drone-test-project /drone-test-project
 CMD [ "/drone-test-project" ]
-

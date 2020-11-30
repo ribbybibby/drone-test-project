@@ -27,10 +27,6 @@ steps:
       - test -n "${DRONE_BRANCH}" && test "${DRONE_BRANCH}" != "master" && echo -n "${DRONE_BRANCH}," > .tags || true
       - test -n "${DRONE_TAG}" && echo -n "${DRONE_TAG}," >> .tags || true
       - sed -i "s/,$//" .tags
-    when:
-      event:
-        exclude:
-          - pull_request
 
   - name: docker-publish
     image: plugins/docker
@@ -41,7 +37,8 @@ steps:
         from_secret: docker_password
       repo: quay.io/utilitywarehouse/drone-test-project
       registry: quay.io
-    when:
-      event:
-        exclude:
-          - pull_request
+
+trigger:
+  event:
+    exclude:
+      - pull_request

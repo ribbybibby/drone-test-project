@@ -23,9 +23,14 @@ steps:
   - name: docker-tag
     image: alpine
     commands:
-      - test "${DRONE_BRANCH}" == "master" && echo "latest" > .tags ||  true
-      - test "${DRONE_BRANCH}" != "master" && echo "${DRONE_BRANCH}" > .tags || true
-      - test "${DRONE_TAG}" != "" && echo ",${DRONE_TAG}" >> .tags || true
+      - test "${DRONE_BRANCH}" == "master" && echo -n "latest," > .tags || true
+      - test -n "${DRONE_BRANCH}" && test "${DRONE_BRANCH}" != "master" && echo -n "${DRONE_BRANCH}," > .tags || true
+      - test -n "${DRONE_TAG}" && echo -n "${DRONE_TAG}," >> .tags || true
+      - sed -i "s/,$//" .tags
+    when:
+      event:
+        exclude:
+          - pull_request
 
   - name: docker-publish
     image: plugins/docker
